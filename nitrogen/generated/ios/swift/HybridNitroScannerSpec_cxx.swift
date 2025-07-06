@@ -114,15 +114,12 @@ public class HybridNitroScannerSpec_cxx {
     }
   }
   
-  public final var onScan: bridge.std__optional_std__function_void_const_NitroScannerResult_____result______ {
+  public final var vibrateOnScan: bridge.std__optional_bool_ {
     @inline(__always)
     get {
-      return { () -> bridge.std__optional_std__function_void_const_NitroScannerResult_____result______ in
-        if let __unwrappedValue = self.__implementation.onScan {
-          return bridge.create_std__optional_std__function_void_const_NitroScannerResult_____result______({ () -> bridge.Func_void_NitroScannerResult in
-            let __closureWrapper = Func_void_NitroScannerResult(__unwrappedValue)
-            return bridge.create_Func_void_NitroScannerResult(__closureWrapper.toUnsafe())
-          }())
+      return { () -> bridge.std__optional_bool_ in
+        if let __unwrappedValue = self.__implementation.vibrateOnScan {
+          return bridge.create_std__optional_bool_(__unwrappedValue)
         } else {
           return .init()
         }
@@ -130,16 +127,24 @@ public class HybridNitroScannerSpec_cxx {
     }
     @inline(__always)
     set {
-      self.__implementation.onScan = { () -> ((_ result: NitroScannerResult) -> Void)? in
-        if let __unwrapped = newValue.value {
-          return { () -> (NitroScannerResult) -> Void in
-            let __wrappedFunction = bridge.wrap_Func_void_NitroScannerResult(__unwrapped)
-            return { (__result: NitroScannerResult) -> Void in
-              __wrappedFunction.call(__result)
-            }
-          }()
-        } else {
-          return nil
+      self.__implementation.vibrateOnScan = newValue.value
+    }
+  }
+  
+  public final var onScan: bridge.Func_void_NitroScannerResult {
+    @inline(__always)
+    get {
+      return { () -> bridge.Func_void_NitroScannerResult in
+        let __closureWrapper = Func_void_NitroScannerResult(self.__implementation.onScan)
+        return bridge.create_Func_void_NitroScannerResult(__closureWrapper.toUnsafe())
+      }()
+    }
+    @inline(__always)
+    set {
+      self.__implementation.onScan = { () -> (NitroScannerResult) -> Void in
+        let __wrappedFunction = bridge.wrap_Func_void_NitroScannerResult(newValue)
+        return { (__result: NitroScannerResult) -> Void in
+          __wrappedFunction.call(__result)
         }
       }()
     }
