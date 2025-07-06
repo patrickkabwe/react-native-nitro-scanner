@@ -1,11 +1,20 @@
-import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { NitroScanner } from 'react-native-nitro-scanner';
+import React, { useRef } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { NitroScanner, NitroScannerRef } from 'react-native-nitro-scanner';
 
 function App(): React.JSX.Element {
+  const scannerRef = useRef<NitroScannerRef>(null);
+
   return (
     <View style={styles.container}>
-        <NitroScanner isRed={true} style={styles.view} />
+      <NitroScanner
+        ref={scannerRef}
+        enabled={true}
+        onScan={result => {
+          console.log(result);
+        }}
+        style={styles.view}
+      />
     </View>
   );
 }
@@ -17,8 +26,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   view: {
-    width: 200,
-    height: 200
-  }});
+    flex: 1,
+  },
+});
 
 export default App;
