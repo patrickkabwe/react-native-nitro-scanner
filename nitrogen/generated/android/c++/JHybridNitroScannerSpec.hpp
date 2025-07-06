@@ -47,14 +47,17 @@ namespace margelo::nitro::nitroscanner {
 
   public:
     // Properties
-    bool getEnabled() override;
-    void setEnabled(bool enabled) override;
+    std::optional<bool> getEnabled() override;
+    void setEnabled(std::optional<bool> enabled) override;
+    std::optional<bool> getVibrateOnScan() override;
+    void setVibrateOnScan(std::optional<bool> vibrateOnScan) override;
     std::function<void(const NitroScannerResult& /* result */)> getOnScan() override;
     void setOnScan(const std::function<void(const NitroScannerResult& /* result */)>& onScan) override;
 
   public:
     // Methods
-    
+    void startScanning() override;
+    void stopScanning() override;
 
   private:
     friend HybridBase;

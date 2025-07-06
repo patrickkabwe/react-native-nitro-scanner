@@ -16,6 +16,8 @@
 #include <react/renderer/components/view/ConcreteViewShadowNode.h>
 #include <react/renderer/components/view/ViewProps.h>
 
+#include <optional>
+#include <optional>
 #include <functional>
 #include "NitroScannerResult.hpp"
 #include <optional>
@@ -44,7 +46,8 @@ namespace margelo::nitro::nitroscanner::views {
                             const react::RawProps& rawProps);
 
   public:
-    CachedProp<bool> enabled;
+    CachedProp<std::optional<bool>> enabled;
+    CachedProp<std::optional<bool>> vibrateOnScan;
     CachedProp<std::function<void(const NitroScannerResult& /* result */)>> onScan;
     CachedProp<std::optional<std::function<void(const std::shared_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec>& /* ref */)>>> hybridRef;
 

@@ -1,14 +1,8 @@
-import { getHostComponent, type HybridRef } from 'react-native-nitro-modules'
-import NitroScannerConfig from '../nitrogen/generated/shared/json/NitroScannerConfig.json'
+import { type HybridRef } from 'react-native-nitro-modules'
 import type {
-  NitroScannerProps,
-  NitroScannerMethods,
+    NitroScannerMethods,
+    NitroScannerProps,
 } from './views/nitro-scanner.nitro'
-
-
-export const NitroScanner = getHostComponent<NitroScannerProps, NitroScannerMethods>(
-  'NitroScanner',
-  () => NitroScannerConfig
-)
+export { NitroScanner } from './nitro-scanner'
 
 export type NitroScannerRef = HybridRef<NitroScannerProps, NitroScannerMethods>
