@@ -15,13 +15,14 @@ type NitroScannerResult = {
 }
 
 export interface NitroScannerProps extends HybridViewProps {
-    enabled: boolean
+    enabled?: boolean
+    vibrateOnScan?: boolean
     onScan: (result: NitroScannerResult) => void
 }
 
 export interface NitroScannerMethods extends HybridViewMethods {
-    startScanning: () => void
-    stopScanning: () => void
+    startScanning(): void
+    stopScanning(): void
 }
 
 export type NitroScanner = HybridView<NitroScannerProps, NitroScannerMethods, { ios: 'swift', android: 'kotlin' }>

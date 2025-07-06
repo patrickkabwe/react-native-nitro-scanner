@@ -17,6 +17,7 @@ namespace margelo::nitro::nitroscanner { struct NitroScannerResult; }
 // Forward declaration of `NitroScannerType` to properly resolve imports.
 namespace margelo::nitro::nitroscanner { enum class NitroScannerType; }
 
+#include <optional>
 #include <functional>
 #include "NitroScannerResult.hpp"
 #include "NitroScannerType.hpp"
@@ -57,11 +58,19 @@ namespace margelo::nitro::nitroscanner {
 
   public:
     // Properties
-    inline bool getEnabled() noexcept override {
-      return _swiftPart.getEnabled();
+    inline std::optional<bool> getEnabled() noexcept override {
+      auto __result = _swiftPart.getEnabled();
+      return __result;
     }
-    inline void setEnabled(bool enabled) noexcept override {
-      _swiftPart.setEnabled(std::forward<decltype(enabled)>(enabled));
+    inline void setEnabled(std::optional<bool> enabled) noexcept override {
+      _swiftPart.setEnabled(enabled);
+    }
+    inline std::optional<bool> getVibrateOnScan() noexcept override {
+      auto __result = _swiftPart.getVibrateOnScan();
+      return __result;
+    }
+    inline void setVibrateOnScan(std::optional<bool> vibrateOnScan) noexcept override {
+      _swiftPart.setVibrateOnScan(vibrateOnScan);
     }
     inline std::function<void(const NitroScannerResult& /* result */)> getOnScan() noexcept override {
       auto __result = _swiftPart.getOnScan();
@@ -73,7 +82,18 @@ namespace margelo::nitro::nitroscanner {
 
   public:
     // Methods
-    
+    inline void startScanning() override {
+      auto __result = _swiftPart.startScanning();
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+    }
+    inline void stopScanning() override {
+      auto __result = _swiftPart.stopScanning();
+      if (__result.hasError()) [[unlikely]] {
+        std::rethrow_exception(__result.error());
+      }
+    }
 
   private:
     NitroScanner::HybridNitroScannerSpec_cxx _swiftPart;
