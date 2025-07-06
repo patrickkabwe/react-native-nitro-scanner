@@ -97,37 +97,77 @@ public class HybridNitroScannerSpec_cxx {
   }
 
   // Properties
-  public final var enabled: Bool {
+  public final var enabled: bridge.std__optional_bool_ {
     @inline(__always)
     get {
-      return self.__implementation.enabled
-    }
-    @inline(__always)
-    set {
-      self.__implementation.enabled = newValue
-    }
-  }
-  
-  public final var onScan: bridge.Func_void_NitroScannerResult {
-    @inline(__always)
-    get {
-      return { () -> bridge.Func_void_NitroScannerResult in
-        let __closureWrapper = Func_void_NitroScannerResult(self.__implementation.onScan)
-        return bridge.create_Func_void_NitroScannerResult(__closureWrapper.toUnsafe())
+      return { () -> bridge.std__optional_bool_ in
+        if let __unwrappedValue = self.__implementation.enabled {
+          return bridge.create_std__optional_bool_(__unwrappedValue)
+        } else {
+          return .init()
+        }
       }()
     }
     @inline(__always)
     set {
-      self.__implementation.onScan = { () -> (NitroScannerResult) -> Void in
-        let __wrappedFunction = bridge.wrap_Func_void_NitroScannerResult(newValue)
-        return { (__result: NitroScannerResult) -> Void in
-          __wrappedFunction.call(__result)
+      self.__implementation.enabled = newValue.value
+    }
+  }
+  
+  public final var onScan: bridge.std__optional_std__function_void_const_NitroScannerResult_____result______ {
+    @inline(__always)
+    get {
+      return { () -> bridge.std__optional_std__function_void_const_NitroScannerResult_____result______ in
+        if let __unwrappedValue = self.__implementation.onScan {
+          return bridge.create_std__optional_std__function_void_const_NitroScannerResult_____result______({ () -> bridge.Func_void_NitroScannerResult in
+            let __closureWrapper = Func_void_NitroScannerResult(__unwrappedValue)
+            return bridge.create_Func_void_NitroScannerResult(__closureWrapper.toUnsafe())
+          }())
+        } else {
+          return .init()
+        }
+      }()
+    }
+    @inline(__always)
+    set {
+      self.__implementation.onScan = { () -> ((_ result: NitroScannerResult) -> Void)? in
+        if let __unwrapped = newValue.value {
+          return { () -> (NitroScannerResult) -> Void in
+            let __wrappedFunction = bridge.wrap_Func_void_NitroScannerResult(__unwrapped)
+            return { (__result: NitroScannerResult) -> Void in
+              __wrappedFunction.call(__result)
+            }
+          }()
+        } else {
+          return nil
         }
       }()
     }
   }
 
   // Methods
+  @inline(__always)
+  public final func startScanning() -> bridge.Result_void_ {
+    do {
+      try self.__implementation.startScanning()
+      return bridge.create_Result_void_()
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_void_(__exceptionPtr)
+    }
+  }
+  
+  @inline(__always)
+  public final func stopScanning() -> bridge.Result_void_ {
+    do {
+      try self.__implementation.stopScanning()
+      return bridge.create_Result_void_()
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_void_(__exceptionPtr)
+    }
+  }
+  
   public final func getView() -> UnsafeMutableRawPointer {
     return Unmanaged.passRetained(__implementation.view).toOpaque()
   }

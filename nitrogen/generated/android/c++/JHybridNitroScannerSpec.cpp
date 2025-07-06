@@ -12,6 +12,7 @@ namespace margelo::nitro::nitroscanner { struct NitroScannerResult; }
 // Forward declaration of `NitroScannerType` to properly resolve imports.
 namespace margelo::nitro::nitroscanner { enum class NitroScannerType; }
 
+#include <optional>
 #include <functional>
 #include "NitroScannerResult.hpp"
 #include "JFunc_void_NitroScannerResult.hpp"
@@ -38,19 +39,19 @@ namespace margelo::nitro::nitroscanner {
   }
 
   // Properties
-  bool JHybridNitroScannerSpec::getEnabled() {
-    static const auto method = javaClassStatic()->getMethod<jboolean()>("getEnabled");
+  std::optional<bool> JHybridNitroScannerSpec::getEnabled() {
+    static const auto method = javaClassStatic()->getMethod<jni::local_ref<jni::JBoolean>()>("getEnabled");
     auto __result = method(_javaPart);
-    return static_cast<bool>(__result);
+    return __result != nullptr ? std::make_optional(static_cast<bool>(__result->value())) : std::nullopt;
   }
-  void JHybridNitroScannerSpec::setEnabled(bool enabled) {
-    static const auto method = javaClassStatic()->getMethod<void(jboolean /* enabled */)>("setEnabled");
-    method(_javaPart, enabled);
+  void JHybridNitroScannerSpec::setEnabled(std::optional<bool> enabled) {
+    static const auto method = javaClassStatic()->getMethod<void(jni::alias_ref<jni::JBoolean> /* enabled */)>("setEnabled");
+    method(_javaPart, enabled.has_value() ? jni::JBoolean::valueOf(enabled.value()) : nullptr);
   }
-  std::function<void(const NitroScannerResult& /* result */)> JHybridNitroScannerSpec::getOnScan() {
+  std::optional<std::function<void(const NitroScannerResult& /* result */)>> JHybridNitroScannerSpec::getOnScan() {
     static const auto method = javaClassStatic()->getMethod<jni::local_ref<JFunc_void_NitroScannerResult::javaobject>()>("getOnScan_cxx");
     auto __result = method(_javaPart);
-    return [&]() -> std::function<void(const NitroScannerResult& /* result */)> {
+    return __result != nullptr ? std::make_optional([&]() -> std::function<void(const NitroScannerResult& /* result */)> {
       if (__result->isInstanceOf(JFunc_void_NitroScannerResult_cxx::javaClassStatic())) [[likely]] {
         auto downcast = jni::static_ref_cast<JFunc_void_NitroScannerResult_cxx::javaobject>(__result);
         return downcast->cthis()->getFunction();
@@ -60,14 +61,21 @@ namespace margelo::nitro::nitroscanner {
           return __resultRef->invoke(result);
         };
       }
-    }();
+    }()) : std::nullopt;
   }
-  void JHybridNitroScannerSpec::setOnScan(const std::function<void(const NitroScannerResult& /* result */)>& onScan) {
+  void JHybridNitroScannerSpec::setOnScan(const std::optional<std::function<void(const NitroScannerResult& /* result */)>>& onScan) {
     static const auto method = javaClassStatic()->getMethod<void(jni::alias_ref<JFunc_void_NitroScannerResult::javaobject> /* onScan */)>("setOnScan_cxx");
-    method(_javaPart, JFunc_void_NitroScannerResult_cxx::fromCpp(onScan));
+    method(_javaPart, onScan.has_value() ? JFunc_void_NitroScannerResult_cxx::fromCpp(onScan.value()) : nullptr);
   }
 
   // Methods
-  
+  void JHybridNitroScannerSpec::startScanning() {
+    static const auto method = javaClassStatic()->getMethod<void()>("startScanning");
+    method(_javaPart);
+  }
+  void JHybridNitroScannerSpec::stopScanning() {
+    static const auto method = javaClassStatic()->getMethod<void()>("stopScanning");
+    method(_javaPart);
+  }
 
 } // namespace margelo::nitro::nitroscanner

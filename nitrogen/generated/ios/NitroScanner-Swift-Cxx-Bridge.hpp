@@ -23,8 +23,11 @@ namespace NitroScanner { class HybridNitroScannerSpec_cxx; }
 #include "HybridNitroScannerSpec.hpp"
 #include "NitroScannerResult.hpp"
 #include "NitroScannerType.hpp"
+#include <NitroModules/Result.hpp>
+#include <exception>
 #include <functional>
 #include <memory>
+#include <optional>
 #include <string>
 
 /**
@@ -33,6 +36,15 @@ namespace NitroScanner { class HybridNitroScannerSpec_cxx; }
  */
 namespace margelo::nitro::nitroscanner::bridge::swift {
 
+  // pragma MARK: std::optional<bool>
+  /**
+   * Specialized version of `std::optional<bool>`.
+   */
+  using std__optional_bool_ = std::optional<bool>;
+  inline std::optional<bool> create_std__optional_bool_(const bool& value) {
+    return std::optional<bool>(value);
+  }
+  
   // pragma MARK: std::function<void(const NitroScannerResult& /* result */)>
   /**
    * Specialized version of `std::function<void(const NitroScannerResult&)>`.
@@ -55,26 +67,13 @@ namespace margelo::nitro::nitroscanner::bridge::swift {
     return Func_void_NitroScannerResult_Wrapper(std::move(value));
   }
   
-  // pragma MARK: std::function<void()>
+  // pragma MARK: std::optional<std::function<void(const NitroScannerResult& /* result */)>>
   /**
-   * Specialized version of `std::function<void()>`.
+   * Specialized version of `std::optional<std::function<void(const NitroScannerResult& / * result * /)>>`.
    */
-  using Func_void = std::function<void()>;
-  /**
-   * Wrapper class for a `std::function<void()>`, this can be used from Swift.
-   */
-  class Func_void_Wrapper final {
-  public:
-    explicit Func_void_Wrapper(std::function<void()>&& func): _function(std::make_shared<std::function<void()>>(std::move(func))) {}
-    inline void call() const {
-      _function->operator()();
-    }
-  private:
-    std::shared_ptr<std::function<void()>> _function;
-  };
-  Func_void create_Func_void(void* _Nonnull swiftClosureWrapper);
-  inline Func_void_Wrapper wrap_Func_void(Func_void value) {
-    return Func_void_Wrapper(std::move(value));
+  using std__optional_std__function_void_const_NitroScannerResult_____result______ = std::optional<std::function<void(const NitroScannerResult& /* result */)>>;
+  inline std::optional<std::function<void(const NitroScannerResult& /* result */)>> create_std__optional_std__function_void_const_NitroScannerResult_____result______(const std::function<void(const NitroScannerResult& /* result */)>& value) {
+    return std::optional<std::function<void(const NitroScannerResult& /* result */)>>(value);
   }
   
   // pragma MARK: std::shared_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec>
@@ -88,5 +87,14 @@ namespace margelo::nitro::nitroscanner::bridge::swift {
   // pragma MARK: std::weak_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec>
   using std__weak_ptr_margelo__nitro__nitroscanner__HybridNitroScannerSpec_ = std::weak_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec>;
   inline std__weak_ptr_margelo__nitro__nitroscanner__HybridNitroScannerSpec_ weakify_std__shared_ptr_margelo__nitro__nitroscanner__HybridNitroScannerSpec_(const std::shared_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec>& strong) { return strong; }
+  
+  // pragma MARK: Result<void>
+  using Result_void_ = Result<void>;
+  inline Result_void_ create_Result_void_() {
+    return Result<void>::withValue();
+  }
+  inline Result_void_ create_Result_void_(const std::exception_ptr& error) {
+    return Result<void>::withError(error);
+  }
 
 } // namespace margelo::nitro::nitroscanner::bridge::swift

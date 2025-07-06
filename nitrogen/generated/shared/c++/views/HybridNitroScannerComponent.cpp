@@ -25,22 +25,22 @@ namespace margelo::nitro::nitroscanner::views {
                                                    const HybridNitroScannerProps& sourceProps,
                                                    const react::RawProps& rawProps):
     react::ViewProps(context, sourceProps, rawProps, filterObjectKeys),
-    enabled([&]() -> CachedProp<bool> {
+    enabled([&]() -> CachedProp<std::optional<bool>> {
       try {
         const react::RawValue* rawValue = rawProps.at("enabled", nullptr, nullptr);
         if (rawValue == nullptr) return sourceProps.enabled;
         const auto& [runtime, value] = (std::pair<jsi::Runtime*, jsi::Value>)*rawValue;
-        return CachedProp<bool>::fromRawValue(*runtime, value, sourceProps.enabled);
+        return CachedProp<std::optional<bool>>::fromRawValue(*runtime, value, sourceProps.enabled);
       } catch (const std::exception& exc) {
         throw std::runtime_error(std::string("NitroScanner.enabled: ") + exc.what());
       }
     }()),
-    onScan([&]() -> CachedProp<std::function<void(const NitroScannerResult& /* result */)>> {
+    onScan([&]() -> CachedProp<std::optional<std::function<void(const NitroScannerResult& /* result */)>>> {
       try {
         const react::RawValue* rawValue = rawProps.at("onScan", nullptr, nullptr);
         if (rawValue == nullptr) return sourceProps.onScan;
         const auto& [runtime, value] = (std::pair<jsi::Runtime*, jsi::Value>)*rawValue;
-        return CachedProp<std::function<void(const NitroScannerResult& /* result */)>>::fromRawValue(*runtime, value.asObject(*runtime).getProperty(*runtime, "f"), sourceProps.onScan);
+        return CachedProp<std::optional<std::function<void(const NitroScannerResult& /* result */)>>>::fromRawValue(*runtime, value.asObject(*runtime).getProperty(*runtime, "f"), sourceProps.onScan);
       } catch (const std::exception& exc) {
         throw std::runtime_error(std::string("NitroScanner.onScan: ") + exc.what());
       }
