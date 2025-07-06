@@ -18,6 +18,8 @@ namespace margelo::nitro::nitroscanner {
       prototype.registerHybridSetter("enabled", &HybridNitroScannerSpec::setEnabled);
       prototype.registerHybridGetter("onScan", &HybridNitroScannerSpec::getOnScan);
       prototype.registerHybridSetter("onScan", &HybridNitroScannerSpec::setOnScan);
+      prototype.registerHybridMethod("startScanning", &HybridNitroScannerSpec::startScanning);
+      prototype.registerHybridMethod("stopScanning", &HybridNitroScannerSpec::stopScanning);
     });
   }
 

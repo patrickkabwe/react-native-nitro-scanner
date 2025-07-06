@@ -42,24 +42,30 @@ abstract class HybridNitroScannerSpec: HybridView() {
   @get:Keep
   @set:DoNotStrip
   @set:Keep
-  abstract var enabled: Boolean
+  abstract var enabled: Boolean?
   
-  abstract var onScan: (result: NitroScannerResult) -> Unit
+  abstract var onScan: ((NitroScannerResult) -> Unit)?
   
-  private var onScan_cxx: Func_void_NitroScannerResult
+  private var onScan_cxx: Func_void_NitroScannerResult?
     @Keep
     @DoNotStrip
     get() {
-      return Func_void_NitroScannerResult_java(onScan)
+      return onScan?.let { Func_void_NitroScannerResult_java(it) }
     }
     @Keep
     @DoNotStrip
     set(value) {
-      onScan = value
+      onScan = value?.let { it }
     }
 
   // Methods
+  @DoNotStrip
+  @Keep
+  abstract fun startScanning(): Unit
   
+  @DoNotStrip
+  @Keep
+  abstract fun stopScanning(): Unit
 
   private external fun initHybrid(): HybridData
 

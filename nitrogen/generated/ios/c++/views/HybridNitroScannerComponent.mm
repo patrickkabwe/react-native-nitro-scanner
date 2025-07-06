@@ -71,12 +71,12 @@ using namespace margelo::nitro::nitroscanner::views;
   // 2. Update each prop individually
   swiftPart.beforeUpdate();
 
-  // enabled: boolean
+  // enabled: optional
   if (newViewProps.enabled.isDirty) {
     swiftPart.setEnabled(newViewProps.enabled.value);
     newViewProps.enabled.isDirty = false;
   }
-  // onScan: function
+  // onScan: optional
   if (newViewProps.onScan.isDirty) {
     swiftPart.setOnScan(newViewProps.onScan.value);
     newViewProps.onScan.isDirty = false;

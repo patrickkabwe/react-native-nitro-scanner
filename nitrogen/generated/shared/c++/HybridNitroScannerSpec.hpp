@@ -16,6 +16,7 @@
 // Forward declaration of `NitroScannerResult` to properly resolve imports.
 namespace margelo::nitro::nitroscanner { struct NitroScannerResult; }
 
+#include <optional>
 #include <functional>
 #include "NitroScannerResult.hpp"
 
@@ -46,14 +47,15 @@ namespace margelo::nitro::nitroscanner {
 
     public:
       // Properties
-      virtual bool getEnabled() = 0;
-      virtual void setEnabled(bool enabled) = 0;
-      virtual std::function<void(const NitroScannerResult& /* result */)> getOnScan() = 0;
-      virtual void setOnScan(const std::function<void(const NitroScannerResult& /* result */)>& onScan) = 0;
+      virtual std::optional<bool> getEnabled() = 0;
+      virtual void setEnabled(std::optional<bool> enabled) = 0;
+      virtual std::optional<std::function<void(const NitroScannerResult& /* result */)>> getOnScan() = 0;
+      virtual void setOnScan(const std::optional<std::function<void(const NitroScannerResult& /* result */)>>& onScan) = 0;
 
     public:
       // Methods
-      
+      virtual void startScanning() = 0;
+      virtual void stopScanning() = 0;
 
     protected:
       // Hybrid Setup

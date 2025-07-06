@@ -21,14 +21,6 @@ namespace margelo::nitro::nitroscanner::bridge::swift {
     };
   }
   
-  // pragma MARK: std::function<void()>
-  Func_void create_Func_void(void* _Nonnull swiftClosureWrapper) {
-    auto swiftClosure = NitroScanner::Func_void::fromUnsafe(swiftClosureWrapper);
-    return [swiftClosure = std::move(swiftClosure)]() mutable -> void {
-      swiftClosure.call();
-    };
-  }
-  
   // pragma MARK: std::shared_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec>
   std::shared_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec> create_std__shared_ptr_margelo__nitro__nitroscanner__HybridNitroScannerSpec_(void* _Nonnull swiftUnsafePointer) {
     NitroScanner::HybridNitroScannerSpec_cxx swiftPart = NitroScanner::HybridNitroScannerSpec_cxx::fromUnsafe(swiftUnsafePointer);
