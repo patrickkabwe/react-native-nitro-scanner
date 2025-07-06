@@ -29,8 +29,8 @@ export const NitroScanner = (
         f: props.onScan,
       }}
       style={props.style}
-      enabled={props.enabled}
-      vibrateOnScan={props.vibrateOnScan}
+      enabled={props.enabled ?? true}
+      vibrateOnScan={props.vibrateOnScan ?? true}
     />
   )
 }

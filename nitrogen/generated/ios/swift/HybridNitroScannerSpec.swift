@@ -13,7 +13,7 @@ public protocol HybridNitroScannerSpec_protocol: HybridObject, HybridView {
   // Properties
   var enabled: Bool? { get set }
   var vibrateOnScan: Bool? { get set }
-  var onScan: ((_ result: NitroScannerResult) -> Void)? { get set }
+  var onScan: (_ result: NitroScannerResult) -> Void { get set }
 
   // Methods
   func startScanning() throws -> Void

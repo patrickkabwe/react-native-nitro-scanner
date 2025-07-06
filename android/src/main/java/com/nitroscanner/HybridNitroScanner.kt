@@ -17,7 +17,7 @@ class HybridNitroScanner(val context: ThemedReactContext): HybridNitroScannerSpe
     override var enabled: Boolean? = null
     override var vibrateOnScan: Boolean? = null
 
-    override var onScan: ((NitroScannerResult) -> Unit)? = null
+    override var onScan: ((NitroScannerResult) -> Unit) = {  }
 
     override fun startScanning() {
         // start scanning

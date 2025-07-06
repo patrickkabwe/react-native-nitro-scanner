@@ -45,12 +45,12 @@ namespace margelo::nitro::nitroscanner::views {
         throw std::runtime_error(std::string("NitroScanner.vibrateOnScan: ") + exc.what());
       }
     }()),
-    onScan([&]() -> CachedProp<std::optional<std::function<void(const NitroScannerResult& /* result */)>>> {
+    onScan([&]() -> CachedProp<std::function<void(const NitroScannerResult& /* result */)>> {
       try {
         const react::RawValue* rawValue = rawProps.at("onScan", nullptr, nullptr);
         if (rawValue == nullptr) return sourceProps.onScan;
         const auto& [runtime, value] = (std::pair<jsi::Runtime*, jsi::Value>)*rawValue;
-        return CachedProp<std::optional<std::function<void(const NitroScannerResult& /* result */)>>>::fromRawValue(*runtime, value.asObject(*runtime).getProperty(*runtime, "f"), sourceProps.onScan);
+        return CachedProp<std::function<void(const NitroScannerResult& /* result */)>>::fromRawValue(*runtime, value.asObject(*runtime).getProperty(*runtime, "f"), sourceProps.onScan);
       } catch (const std::exception& exc) {
         throw std::runtime_error(std::string("NitroScanner.onScan: ") + exc.what());
       }

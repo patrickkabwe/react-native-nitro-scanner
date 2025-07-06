@@ -81,7 +81,7 @@ using namespace margelo::nitro::nitroscanner::views;
     swiftPart.setVibrateOnScan(newViewProps.vibrateOnScan.value);
     newViewProps.vibrateOnScan.isDirty = false;
   }
-  // onScan: optional
+  // onScan: function
   if (newViewProps.onScan.isDirty) {
     swiftPart.setOnScan(newViewProps.onScan.value);
     newViewProps.onScan.isDirty = false;

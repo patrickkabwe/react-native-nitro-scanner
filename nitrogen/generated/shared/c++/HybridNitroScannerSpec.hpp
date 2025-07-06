@@ -51,8 +51,8 @@ namespace margelo::nitro::nitroscanner {
       virtual void setEnabled(std::optional<bool> enabled) = 0;
       virtual std::optional<bool> getVibrateOnScan() = 0;
       virtual void setVibrateOnScan(std::optional<bool> vibrateOnScan) = 0;
-      virtual std::optional<std::function<void(const NitroScannerResult& /* result */)>> getOnScan() = 0;
-      virtual void setOnScan(const std::optional<std::function<void(const NitroScannerResult& /* result */)>>& onScan) = 0;
+      virtual std::function<void(const NitroScannerResult& /* result */)> getOnScan() = 0;
+      virtual void setOnScan(const std::function<void(const NitroScannerResult& /* result */)>& onScan) = 0;
 
     public:
       // Methods

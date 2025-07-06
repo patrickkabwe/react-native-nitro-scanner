@@ -67,15 +67,6 @@ namespace margelo::nitro::nitroscanner::bridge::swift {
     return Func_void_NitroScannerResult_Wrapper(std::move(value));
   }
   
-  // pragma MARK: std::optional<std::function<void(const NitroScannerResult& /* result */)>>
-  /**
-   * Specialized version of `std::optional<std::function<void(const NitroScannerResult& / * result * /)>>`.
-   */
-  using std__optional_std__function_void_const_NitroScannerResult_____result______ = std::optional<std::function<void(const NitroScannerResult& /* result */)>>;
-  inline std::optional<std::function<void(const NitroScannerResult& /* result */)>> create_std__optional_std__function_void_const_NitroScannerResult_____result______(const std::function<void(const NitroScannerResult& /* result */)>& value) {
-    return std::optional<std::function<void(const NitroScannerResult& /* result */)>>(value);
-  }
-  
   // pragma MARK: std::shared_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec>
   /**
    * Specialized version of `std::shared_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec>`.

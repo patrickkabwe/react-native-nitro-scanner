@@ -17,7 +17,7 @@ type NitroScannerResult = {
 export interface NitroScannerProps extends HybridViewProps {
     enabled?: boolean
     vibrateOnScan?: boolean
-    onScan?: (result: NitroScannerResult) => void
+    onScan: (result: NitroScannerResult) => void
 }
 
 export interface NitroScannerMethods extends HybridViewMethods {

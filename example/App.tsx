@@ -9,8 +9,6 @@ function App(): React.JSX.Element {
     <View style={styles.container}>
       <NitroScanner
         ref={scannerRef}
-        enabled={true}
-        vibrateOnScan={true}
         onScan={result => {
           console.log(result);
         }}
