@@ -16,6 +16,8 @@ namespace margelo::nitro::nitroscanner {
     registerHybrids(this, [](Prototype& prototype) {
       prototype.registerHybridGetter("enabled", &HybridNitroScannerSpec::getEnabled);
       prototype.registerHybridSetter("enabled", &HybridNitroScannerSpec::setEnabled);
+      prototype.registerHybridGetter("vibrateOnScan", &HybridNitroScannerSpec::getVibrateOnScan);
+      prototype.registerHybridSetter("vibrateOnScan", &HybridNitroScannerSpec::setVibrateOnScan);
       prototype.registerHybridGetter("onScan", &HybridNitroScannerSpec::getOnScan);
       prototype.registerHybridSetter("onScan", &HybridNitroScannerSpec::setOnScan);
       prototype.registerHybridMethod("startScanning", &HybridNitroScannerSpec::startScanning);

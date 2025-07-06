@@ -48,6 +48,15 @@ namespace margelo::nitro::nitroscanner {
     static const auto method = javaClassStatic()->getMethod<void(jni::alias_ref<jni::JBoolean> /* enabled */)>("setEnabled");
     method(_javaPart, enabled.has_value() ? jni::JBoolean::valueOf(enabled.value()) : nullptr);
   }
+  std::optional<bool> JHybridNitroScannerSpec::getVibrateOnScan() {
+    static const auto method = javaClassStatic()->getMethod<jni::local_ref<jni::JBoolean>()>("getVibrateOnScan");
+    auto __result = method(_javaPart);
+    return __result != nullptr ? std::make_optional(static_cast<bool>(__result->value())) : std::nullopt;
+  }
+  void JHybridNitroScannerSpec::setVibrateOnScan(std::optional<bool> vibrateOnScan) {
+    static const auto method = javaClassStatic()->getMethod<void(jni::alias_ref<jni::JBoolean> /* vibrateOnScan */)>("setVibrateOnScan");
+    method(_javaPart, vibrateOnScan.has_value() ? jni::JBoolean::valueOf(vibrateOnScan.value()) : nullptr);
+  }
   std::optional<std::function<void(const NitroScannerResult& /* result */)>> JHybridNitroScannerSpec::getOnScan() {
     static const auto method = javaClassStatic()->getMethod<jni::local_ref<JFunc_void_NitroScannerResult::javaobject>()>("getOnScan_cxx");
     auto __result = method(_javaPart);

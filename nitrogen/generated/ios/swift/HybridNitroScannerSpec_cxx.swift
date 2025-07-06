@@ -114,6 +114,23 @@ public class HybridNitroScannerSpec_cxx {
     }
   }
   
+  public final var vibrateOnScan: bridge.std__optional_bool_ {
+    @inline(__always)
+    get {
+      return { () -> bridge.std__optional_bool_ in
+        if let __unwrappedValue = self.__implementation.vibrateOnScan {
+          return bridge.create_std__optional_bool_(__unwrappedValue)
+        } else {
+          return .init()
+        }
+      }()
+    }
+    @inline(__always)
+    set {
+      self.__implementation.vibrateOnScan = newValue.value
+    }
+  }
+  
   public final var onScan: bridge.std__optional_std__function_void_const_NitroScannerResult_____result______ {
     @inline(__always)
     get {

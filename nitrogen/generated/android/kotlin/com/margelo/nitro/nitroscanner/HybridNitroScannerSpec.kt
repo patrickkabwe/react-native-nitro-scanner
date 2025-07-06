@@ -44,7 +44,13 @@ abstract class HybridNitroScannerSpec: HybridView() {
   @set:Keep
   abstract var enabled: Boolean?
   
-  abstract var onScan: ((NitroScannerResult) -> Unit)?
+  @get:DoNotStrip
+  @get:Keep
+  @set:DoNotStrip
+  @set:Keep
+  abstract var vibrateOnScan: Boolean?
+  
+  abstract var onScan: ((result: NitroScannerResult) -> Unit)?
   
   private var onScan_cxx: Func_void_NitroScannerResult?
     @Keep

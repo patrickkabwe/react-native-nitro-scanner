@@ -12,12 +12,21 @@ protocol NitroScannerControllerDelegate: AnyObject {
     func didScan(type: AVMetadataObject.ObjectType, value: String)
 }
 
+
+struct NitroScannerControllerOptions {
+    var vibrateOnScan: Bool = true
+}
+
 final class NitroScannerController: NSObject {
     private let session = AVCaptureSession()
     private weak var delegate: NitroScannerControllerDelegate?
     private weak var previewView: NitroScannerView?
+    var options = NitroScannerControllerOptions()
 
-    init(previewView: NitroScannerView, delegate: NitroScannerControllerDelegate) {
+    init(
+        previewView: NitroScannerView,
+        delegate: NitroScannerControllerDelegate
+    ) {
         self.previewView = previewView
         self.delegate = delegate
         super.init()
@@ -87,6 +96,9 @@ extension NitroScannerController: AVCaptureMetadataOutputObjectsDelegate {
         guard let object = metadataObjects.first as? AVMetadataMachineReadableCodeObject,
               let value = object.stringValue else {
             return
+        }
+        if (options.vibrateOnScan) {
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         }
         delegate?.didScan(type: object.type, value: value)
     }

@@ -14,7 +14,7 @@ export const HybridNitroScanner = getHostComponent<
 
 export const NitroScanner = (
   props: NitroScannerProps & {
-    ref: { current: NitroScannerRef | null }
+    ref: React.RefObject<NitroScannerRef | null>
     style: StyleProp<ViewStyle>
   }
 ) => {
@@ -25,11 +25,12 @@ export const NitroScanner = (
           props.ref.current = ref
         },
       }}
-      enabled={props.enabled}
       onScan={{
         f: props.onScan,
       }}
       style={props.style}
+      enabled={props.enabled}
+      vibrateOnScan={props.vibrateOnScan}
     />
   )
 }

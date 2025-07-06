@@ -65,6 +65,13 @@ namespace margelo::nitro::nitroscanner {
     inline void setEnabled(std::optional<bool> enabled) noexcept override {
       _swiftPart.setEnabled(enabled);
     }
+    inline std::optional<bool> getVibrateOnScan() noexcept override {
+      auto __result = _swiftPart.getVibrateOnScan();
+      return __result;
+    }
+    inline void setVibrateOnScan(std::optional<bool> vibrateOnScan) noexcept override {
+      _swiftPart.setVibrateOnScan(vibrateOnScan);
+    }
     inline std::optional<std::function<void(const NitroScannerResult& /* result */)>> getOnScan() noexcept override {
       auto __result = _swiftPart.getOnScan();
       return __result;

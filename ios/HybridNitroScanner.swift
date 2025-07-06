@@ -15,7 +15,10 @@ class HybridNitroScanner : HybridNitroScannerSpec, NitroScannerControllerDelegat
     
     override init() {
         super.init()
-        controller = NitroScannerController(previewView: scannerView, delegate: self)
+        controller = NitroScannerController(
+            previewView: scannerView,
+            delegate: self
+        )
     }
     
     var view: UIView { scannerView }
@@ -23,6 +26,12 @@ class HybridNitroScanner : HybridNitroScannerSpec, NitroScannerControllerDelegat
     var enabled: Bool? {
         didSet {
             enabled == true ? controller.start() : controller.stop()
+        }
+    }
+    
+    var vibrateOnScan: Bool? {
+        didSet {
+            controller.options.vibrateOnScan = vibrateOnScan ?? false
         }
     }
     

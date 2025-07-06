@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 import { NitroScanner, NitroScannerRef } from 'react-native-nitro-scanner';
 
 function App(): React.JSX.Element {
@@ -10,11 +10,26 @@ function App(): React.JSX.Element {
       <NitroScanner
         ref={scannerRef}
         enabled={true}
+        vibrateOnScan={true}
         onScan={result => {
           console.log(result);
         }}
         style={styles.view}
       />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Start Scanning"
+          onPress={() => {
+            scannerRef.current?.startScanning();
+          }}
+        />
+        <Button
+          title="Stop Scanning"
+          onPress={() => {
+            scannerRef.current?.stopScanning();
+          }}
+        />
+      </View>
     </View>
   );
 }
@@ -28,6 +43,10 @@ const styles = StyleSheet.create({
   view: {
     flex: 0.5,
     width: '100%',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    gap: 10,
   },
 });
 
