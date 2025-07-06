@@ -35,12 +35,22 @@ namespace margelo::nitro::nitroscanner::views {
         throw std::runtime_error(std::string("NitroScanner.enabled: ") + exc.what());
       }
     }()),
-    onScan([&]() -> CachedProp<std::optional<std::function<void(const NitroScannerResult& /* result */)>>> {
+    vibrateOnScan([&]() -> CachedProp<std::optional<bool>> {
+      try {
+        const react::RawValue* rawValue = rawProps.at("vibrateOnScan", nullptr, nullptr);
+        if (rawValue == nullptr) return sourceProps.vibrateOnScan;
+        const auto& [runtime, value] = (std::pair<jsi::Runtime*, jsi::Value>)*rawValue;
+        return CachedProp<std::optional<bool>>::fromRawValue(*runtime, value, sourceProps.vibrateOnScan);
+      } catch (const std::exception& exc) {
+        throw std::runtime_error(std::string("NitroScanner.vibrateOnScan: ") + exc.what());
+      }
+    }()),
+    onScan([&]() -> CachedProp<std::function<void(const NitroScannerResult& /* result */)>> {
       try {
         const react::RawValue* rawValue = rawProps.at("onScan", nullptr, nullptr);
         if (rawValue == nullptr) return sourceProps.onScan;
         const auto& [runtime, value] = (std::pair<jsi::Runtime*, jsi::Value>)*rawValue;
-        return CachedProp<std::optional<std::function<void(const NitroScannerResult& /* result */)>>>::fromRawValue(*runtime, value.asObject(*runtime).getProperty(*runtime, "f"), sourceProps.onScan);
+        return CachedProp<std::function<void(const NitroScannerResult& /* result */)>>::fromRawValue(*runtime, value.asObject(*runtime).getProperty(*runtime, "f"), sourceProps.onScan);
       } catch (const std::exception& exc) {
         throw std::runtime_error(std::string("NitroScanner.onScan: ") + exc.what());
       }
@@ -59,12 +69,14 @@ namespace margelo::nitro::nitroscanner::views {
   HybridNitroScannerProps::HybridNitroScannerProps(const HybridNitroScannerProps& other):
     react::ViewProps(),
     enabled(other.enabled),
+    vibrateOnScan(other.vibrateOnScan),
     onScan(other.onScan),
     hybridRef(other.hybridRef) { }
 
   bool HybridNitroScannerProps::filterObjectKeys(const std::string& propName) {
     switch (hashString(propName)) {
       case hashString("enabled"): return true;
+      case hashString("vibrateOnScan"): return true;
       case hashString("onScan"): return true;
       case hashString("hybridRef"): return true;
       default: return false;

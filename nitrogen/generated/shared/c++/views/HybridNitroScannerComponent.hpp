@@ -47,7 +47,8 @@ namespace margelo::nitro::nitroscanner::views {
 
   public:
     CachedProp<std::optional<bool>> enabled;
-    CachedProp<std::optional<std::function<void(const NitroScannerResult& /* result */)>>> onScan;
+    CachedProp<std::optional<bool>> vibrateOnScan;
+    CachedProp<std::function<void(const NitroScannerResult& /* result */)>> onScan;
     CachedProp<std::optional<std::function<void(const std::shared_ptr<margelo::nitro::nitroscanner::HybridNitroScannerSpec>& /* ref */)>>> hybridRef;
 
   private:

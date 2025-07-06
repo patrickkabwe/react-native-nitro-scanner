@@ -5,6 +5,7 @@
   "directEventTypes": {},
   "validAttributes": {
     "enabled": true,
+    "vibrateOnScan": true,
     "onScan": true,
     "hybridRef": true
   }

@@ -8,18 +8,14 @@
 import AVFoundation
 import NitroModules
 
-protocol NitroScannerControllerDelegate: AnyObject {
-    func didScan(type: AVMetadataObject.ObjectType, value: String)
-}
-
 final class NitroScannerController: NSObject {
     private let session = AVCaptureSession()
-    private weak var delegate: NitroScannerControllerDelegate?
     private weak var previewView: NitroScannerView?
+    var vibrateOnScan: Bool = true
+    var onScan: ((NitroScannerResult) -> Void) = { _ in }
 
-    init(previewView: NitroScannerView, delegate: NitroScannerControllerDelegate) {
+    init(previewView: NitroScannerView) {
         self.previewView = previewView
-        self.delegate = delegate
         super.init()
         configureSession()
     }
@@ -88,6 +84,17 @@ extension NitroScannerController: AVCaptureMetadataOutputObjectsDelegate {
               let value = object.stringValue else {
             return
         }
-        delegate?.didScan(type: object.type, value: value)
+        if (vibrateOnScan) {
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        }
+        do {
+            let codeType = try getCodeType(type: object.type)
+            onScan(NitroScannerResult(
+                type: codeType,
+                value: value)
+            )
+        } catch {
+            print("Error parsing code type: \(error.localizedDescription)")
+        }
     }
 }
