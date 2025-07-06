@@ -1,6 +1,5 @@
 package com.nitroscanner
 
-import android.graphics.Color
 import android.view.View
 import androidx.annotation.Keep
 import com.facebook.proguard.annotations.DoNotStrip
@@ -14,14 +13,15 @@ class HybridNitroScanner(val context: ThemedReactContext): HybridNitroScannerSpe
     override val view: View = View(context)
 
     // Props
-    private var _isRed = false
-    override var isRed: Boolean
-        get() = _isRed
-        set(value) {
-            _isRed = value
-            view.setBackgroundColor(
-                if (value) Color.RED
-                else Color.BLACK
-            )
-        }
+    override var enabled: Boolean? = false
+
+    override var onScan: ((NitroScannerResult) -> Unit)? = null
+
+    override fun startScanning() {
+        // start scanning
+    }
+
+    override fun stopScanning() {
+        // stop scanning
+    }
 }

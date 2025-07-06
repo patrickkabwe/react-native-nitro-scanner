@@ -1,13 +1,27 @@
 import type {
-  HybridView,
-  HybridViewProps,
-  HybridViewMethods,
+    HybridView,
+    HybridViewMethods,
+    HybridViewProps,
 } from 'react-native-nitro-modules'
 
-export interface NitroScannerProps extends HybridViewProps {
-   isRed: boolean
+enum NitroScannerType {
+    BARCODE,
+    QR_CODE,
 }
 
-export interface NitroScannerMethods extends HybridViewMethods {}
+type NitroScannerResult = {
+    type: NitroScannerType
+    value: string
+}
+
+export interface NitroScannerProps extends HybridViewProps {
+    enabled: boolean
+    onScan: (result: NitroScannerResult) => void
+}
+
+export interface NitroScannerMethods extends HybridViewMethods {
+    startScanning: () => void
+    stopScanning: () => void
+}
 
 export type NitroScanner = HybridView<NitroScannerProps, NitroScannerMethods, { ios: 'swift', android: 'kotlin' }>
