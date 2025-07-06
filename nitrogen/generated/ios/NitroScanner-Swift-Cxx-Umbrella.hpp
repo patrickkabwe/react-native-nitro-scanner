@@ -19,8 +19,11 @@ namespace margelo::nitro::nitroscanner { enum class NitroScannerType; }
 #include "HybridNitroScannerSpec.hpp"
 #include "NitroScannerResult.hpp"
 #include "NitroScannerType.hpp"
+#include <NitroModules/Result.hpp>
+#include <exception>
 #include <functional>
 #include <memory>
+#include <optional>
 #include <string>
 
 // C++ helpers for Swift

@@ -97,14 +97,37 @@ public class HybridNitroScannerSpec_cxx {
   }
 
   // Properties
-  public final var enabled: Bool {
+  public final var enabled: bridge.std__optional_bool_ {
     @inline(__always)
     get {
-      return self.__implementation.enabled
+      return { () -> bridge.std__optional_bool_ in
+        if let __unwrappedValue = self.__implementation.enabled {
+          return bridge.create_std__optional_bool_(__unwrappedValue)
+        } else {
+          return .init()
+        }
+      }()
     }
     @inline(__always)
     set {
-      self.__implementation.enabled = newValue
+      self.__implementation.enabled = newValue.value
+    }
+  }
+  
+  public final var vibrateOnScan: bridge.std__optional_bool_ {
+    @inline(__always)
+    get {
+      return { () -> bridge.std__optional_bool_ in
+        if let __unwrappedValue = self.__implementation.vibrateOnScan {
+          return bridge.create_std__optional_bool_(__unwrappedValue)
+        } else {
+          return .init()
+        }
+      }()
+    }
+    @inline(__always)
+    set {
+      self.__implementation.vibrateOnScan = newValue.value
     }
   }
   
@@ -128,6 +151,28 @@ public class HybridNitroScannerSpec_cxx {
   }
 
   // Methods
+  @inline(__always)
+  public final func startScanning() -> bridge.Result_void_ {
+    do {
+      try self.__implementation.startScanning()
+      return bridge.create_Result_void_()
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_void_(__exceptionPtr)
+    }
+  }
+  
+  @inline(__always)
+  public final func stopScanning() -> bridge.Result_void_ {
+    do {
+      try self.__implementation.stopScanning()
+      return bridge.create_Result_void_()
+    } catch (let __error) {
+      let __exceptionPtr = __error.toCpp()
+      return bridge.create_Result_void_(__exceptionPtr)
+    }
+  }
+  
   public final func getView() -> UnsafeMutableRawPointer {
     return Unmanaged.passRetained(__implementation.view).toOpaque()
   }

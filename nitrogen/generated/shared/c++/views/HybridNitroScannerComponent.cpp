@@ -25,14 +25,24 @@ namespace margelo::nitro::nitroscanner::views {
                                                    const HybridNitroScannerProps& sourceProps,
                                                    const react::RawProps& rawProps):
     react::ViewProps(context, sourceProps, rawProps, filterObjectKeys),
-    enabled([&]() -> CachedProp<bool> {
+    enabled([&]() -> CachedProp<std::optional<bool>> {
       try {
         const react::RawValue* rawValue = rawProps.at("enabled", nullptr, nullptr);
         if (rawValue == nullptr) return sourceProps.enabled;
         const auto& [runtime, value] = (std::pair<jsi::Runtime*, jsi::Value>)*rawValue;
-        return CachedProp<bool>::fromRawValue(*runtime, value, sourceProps.enabled);
+        return CachedProp<std::optional<bool>>::fromRawValue(*runtime, value, sourceProps.enabled);
       } catch (const std::exception& exc) {
         throw std::runtime_error(std::string("NitroScanner.enabled: ") + exc.what());
+      }
+    }()),
+    vibrateOnScan([&]() -> CachedProp<std::optional<bool>> {
+      try {
+        const react::RawValue* rawValue = rawProps.at("vibrateOnScan", nullptr, nullptr);
+        if (rawValue == nullptr) return sourceProps.vibrateOnScan;
+        const auto& [runtime, value] = (std::pair<jsi::Runtime*, jsi::Value>)*rawValue;
+        return CachedProp<std::optional<bool>>::fromRawValue(*runtime, value, sourceProps.vibrateOnScan);
+      } catch (const std::exception& exc) {
+        throw std::runtime_error(std::string("NitroScanner.vibrateOnScan: ") + exc.what());
       }
     }()),
     onScan([&]() -> CachedProp<std::function<void(const NitroScannerResult& /* result */)>> {
@@ -59,12 +69,14 @@ namespace margelo::nitro::nitroscanner::views {
   HybridNitroScannerProps::HybridNitroScannerProps(const HybridNitroScannerProps& other):
     react::ViewProps(),
     enabled(other.enabled),
+    vibrateOnScan(other.vibrateOnScan),
     onScan(other.onScan),
     hybridRef(other.hybridRef) { }
 
   bool HybridNitroScannerProps::filterObjectKeys(const std::string& propName) {
     switch (hashString(propName)) {
       case hashString("enabled"): return true;
+      case hashString("vibrateOnScan"): return true;
       case hashString("onScan"): return true;
       case hashString("hybridRef"): return true;
       default: return false;
