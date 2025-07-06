@@ -9,34 +9,32 @@ import Foundation
 import UIKit
 import AVFoundation
 
-class HybridNitroScanner : HybridNitroScannerSpec, NitroScannerControllerDelegate {
+class HybridNitroScanner : HybridNitroScannerSpec {
     private let scannerView = NitroScannerView()
     private var controller: NitroScannerController!
     
     override init() {
         super.init()
-        controller = NitroScannerController(previewView: scannerView, delegate: self)
+        controller = NitroScannerController(previewView: scannerView)
     }
     
     var view: UIView { scannerView }
     
-    var enabled: Bool? {
+    var enabled: Bool? = true {
         didSet {
             enabled == true ? controller.start() : controller.stop()
         }
     }
     
-    var onScan: ((NitroScannerResult) -> Void)?
+    var vibrateOnScan: Bool? {
+        didSet {
+            controller.vibrateOnScan = vibrateOnScan ?? false
+        }
+    }
     
-    func didScan(type: AVMetadataObject.ObjectType, value: String) {
-        do {
-            let codeType = try controller.getCodeType(type: type)
-            onScan?(NitroScannerResult(
-                type: codeType,
-                value: value)
-            )
-        } catch {
-            print("Error parsing code type: \(error.localizedDescription)")
+    var onScan: ((NitroScannerResult) -> Void) = { _ in } {
+        didSet {
+            controller.onScan = onScan
         }
     }
     

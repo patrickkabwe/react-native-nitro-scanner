@@ -159,7 +159,8 @@ The main scanner component that renders a native camera view for scanning barcod
 
 | Prop      | Type                                   | Required | Description                                                  |
 | --------- | -------------------------------------- | -------- | ------------------------------------------------------------ |
-| `enabled` | `boolean`                              | Yes      | Whether the scanner is actively scanning                     |
+| `enabled` | `boolean`                              | No      | Whether the scanner is actively scanning. `true` by Default                     |
+| `vibrateOnScan` | `boolean`                              | No      | Whether the scanner should vibrate on scan. `true` by Default                     |
 | `onScan`  | `(result: NitroScannerResult) => void` | Yes      | Callback function called when a code is successfully scanned |
 | `style`   | `StyleProp<ViewStyle>`                 | No       | Style object to customize the scanner view                   |
 

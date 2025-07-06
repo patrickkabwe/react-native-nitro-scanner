@@ -41,6 +41,10 @@ void JHybridNitroScannerStateUpdater::updateViewProps(jni::alias_ref<jni::JClass
     view->setEnabled(props.enabled.value);
     // TODO: Set isDirty = false
   }
+  if (props.vibrateOnScan.isDirty) {
+    view->setVibrateOnScan(props.vibrateOnScan.value);
+    // TODO: Set isDirty = false
+  }
   if (props.onScan.isDirty) {
     view->setOnScan(props.onScan.value);
     // TODO: Set isDirty = false
