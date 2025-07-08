@@ -254,6 +254,7 @@ Add camera permission to your `AndroidManifest.xml`:
 
 ```xml
 <uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.VIBRATE" />
 ```
 
 ## Troubleshooting
